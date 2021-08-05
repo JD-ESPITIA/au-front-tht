@@ -1,0 +1,16 @@
+<template>
+  <h3>Car list</h3>
+
+  <div class="scroll_vertical"> 
+    <div class="row">
+      <div  repeat.for="auto of autos"  class="col-4 mb-2">
+        <a style="text-align: center;"
+        class="hover list-group-item list-group-item-action ${auto.id === $parent.selectedId ? 'active' : ''}"
+        route-href="route: autos; params.bind: {id:auto.id}" click.delegate="$parent.selectAuto(auto)">
+        <small>${auto.carBrand}</small>
+        <small>${auto.color}</small>
+      </a>
+      </div>
+    </div>
+  </div>
+</template>

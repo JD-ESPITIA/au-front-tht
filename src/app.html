@@ -1,3 +1,20 @@
 <template>
-  <h1>${message}</h1>
+  <require from="./app.css"></require>
+  <require from="./components/header"></require>
+  <require from="./components/auto-list"></require>
+  <require from="./components/auto-detail"></require>
+
+  <header></header>
+
+
+  <div class="container">
+    <div class="row">
+      <router-view class="col-12"></router-view>
+    </div>
+    <div class="row">
+      <auto-list class="col-12"></auto-list>
+    </div>
+  </div>
+
+
 </template>
