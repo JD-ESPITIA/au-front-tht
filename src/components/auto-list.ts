@@ -1,6 +1,6 @@
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {inject} from 'aurelia-framework';
-import {AutoCreated, AutoSelected} from 'events/autoEvents';
+import {AutoCreated, AutoDeleted, AutoSelected} from 'events/autoEvents';
 import {Auto} from 'interfaces/auto.model';
 import {autoApi} from "providers/autoApi.provider";
 
@@ -13,13 +13,19 @@ import {autoApi} from "providers/autoApi.provider";
 
         this.autoApi = autoApi;
         this.getAllAutos();
+        this.startSubscribers();
+    }
 
-
-        ea.subscribe(AutoCreated, auto => {
+    startSubscribers() {
+        this.ea.subscribe(AutoCreated, auto => {
             console.log(auto);
             this.getAllAutos();
         });
 
+        this.ea.subscribe(AutoDeleted, auto => {
+            console.log(auto);
+            this.getAllAutos();
+        });
     }
 
     getAllAutos() {

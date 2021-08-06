@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import { AutoSelected } from 'events/autoEvents';
+import { AutoDeleted, AutoSelected } from 'events/autoEvents';
 import { Auto } from 'interfaces/auto.model';
 import { autoApi } from 'providers/autoApi.provider';
 
@@ -33,9 +33,13 @@ export class AutoDetail {
     console.log(this.selectedAuto);
     this.autoApi.deleteAuto(this.selectedAuto).then((resp) => {
       console.log(resp);
+      this.ea.publish(new AutoDeleted(this.selectedAuto));
     }).catch((err) => {
         console.error(err);
-    })
+        this.ea.publish(new AutoDeleted(this.selectedAuto));
+    });
+
+
   }
 
 
