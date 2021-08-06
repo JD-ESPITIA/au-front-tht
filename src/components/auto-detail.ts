@@ -24,6 +24,13 @@ export class AutoDetail {
     console.log(this.selectedAuto);
     this.autoApi.updateAuto(this.selectedAuto).then((resp) => {
       console.log(resp);
+      alert(resp.response);
+      this.autoApi.getAuto(this.selectedAuto).then((auto) => {
+        console.log('upd current auto');
+        this.selectedAuto = auto;
+      }).catch((err) => {
+        console.error(err);
+      })
     }).catch((err) => {
         console.error(err);
     })
@@ -34,6 +41,7 @@ export class AutoDetail {
     this.autoApi.deleteAuto(this.selectedAuto).then((resp) => {
       console.log(resp);
       this.ea.publish(new AutoDeleted(this.selectedAuto));
+      alert(resp.response);
     }).catch((err) => {
         console.error(err);
         this.ea.publish(new AutoDeleted(this.selectedAuto));

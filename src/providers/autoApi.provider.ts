@@ -1,5 +1,6 @@
 import {HttpClient, json} from 'aurelia-fetch-client';
 import {inject} from 'aurelia-framework';
+import { Auto } from 'interfaces/auto.model';
 
 @inject(HttpClient)
 export class autoApi {
@@ -15,7 +16,7 @@ export class autoApi {
         })
     }
 
-    addAuto(auto) {
+    addAuto(auto:Auto) {
         return this.http.fetch('Auto', {
             method: 'post',
             body: json(auto)
@@ -30,17 +31,28 @@ export class autoApi {
 
 
     getAutos() {
-        return this.http.fetch('Auto').then(response => response.json()).then(books => {
-            console.log(books);
-            return books;
+        return this.http.fetch('Auto').then(response => response.json()).then(autos => {
+            console.log(autos);
+            return autos;
         }).catch(error => {
             console.log('Error retrieving autos.');
             return [];
         });
     }
 
+    getAuto(auto:Auto){
+      return this.http.fetch(`Auto/${
+        auto.id
+    }`).then(response => response.json()).then(autos => {
+        console.log(autos);
+        return autos;
+    }).catch(error => {
+        console.log('Error retrieving auto.');
+        return [];
+    });
+    }
 
-    updateAuto(auto) {
+    updateAuto(auto:Auto) {
         return this.http.fetch(`Auto/${
             auto.id
         }`, {
@@ -57,7 +69,7 @@ export class autoApi {
     }
 
 
-    deleteAuto(auto) {
+    deleteAuto(auto:Auto) {
         return this.http.fetch(`Auto/${
             auto.id
         }`, {method: 'delete'}).then(response => response.json()).then(autoDeleted => {

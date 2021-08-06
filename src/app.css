@@ -15,3 +15,14 @@ div.scroll_vertical {
 .hover:hover {
   transform: scale(1.03);
 }
+
+.boxCreate {
+  position: absolute;
+  z-index: 10000;
+  background: #f2f9ff;
+  border-radius: 21px;
+  box-shadow: -5px 19px 12px #212529;
+  left: 7%;
+  right: 7%;
+  padding: 20px;
+}

@@ -21,6 +21,7 @@ export class AutoCreate{
     this.autoApi.addAuto(this.newAuto).then((resp) => {
       console.log(resp);
       this.ea.publish(new AutoCreated(this.newAuto));
+      alert(resp.response);
     }).catch((err) => {
       console.error(err);
       this.ea.publish(new AutoCreated(this.newAuto)); //fix
